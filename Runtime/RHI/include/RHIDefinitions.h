@@ -95,3 +95,54 @@ enum ERHIResourceType : uint8
 
 	RRT_Num
 };
+
+
+enum class EBufferUsageFlags:uint32
+{
+	None=0,
+	Static=1<<0,
+	Dynamic =1<<1,
+	Volatile =1<<2,
+	UnorderedAccess =1<<3,
+	ByteAddressBuffer =1<<4,
+	SourceCopy=1<<5,
+	StreamOutput =1<<6,
+	DrawIndirect=1<<7,
+	ShaderResource=1<<8,
+	keepCPUAccessible=1<<9,
+	FastVRAM =1<<10,
+	Shared=1<<12,
+	AccelerationStructure=1<<13,
+	VertexBuffer=1<<14,
+	IndexBuffer=1<<15,
+	StructuredBuffer=1<<16,
+	MultiGPUAllocate=1<<17,
+	MultiGPUGraphIgnore=1<<18,
+	RayTracingScratch=(1<<19)|UnorderedAccess,
+	NullResource=1<<20,
+	AnyDynamic=(Dynamic |Volatile)
+};
+
+#define BUF_None                   EBufferUsageFlags::None
+#define BUF_Static                 EBufferUsageFlags::Static
+#define BUF_Dynamic                EBufferUsageFlags::Dynamic
+#define BUF_Volatile               EBufferUsageFlags::Volatile
+#define BUF_UnorderedAccess        EBufferUsageFlags::UnorderedAccess
+#define BUF_ByteAddressBuffer      EBufferUsageFlags::ByteAddressBuffer
+#define BUF_SourceCopy             EBufferUsageFlags::SourceCopy
+#define BUF_StreamOutput           EBufferUsageFlags::StreamOutput
+#define BUF_DrawIndirect           EBufferUsageFlags::DrawIndirect
+#define BUF_ShaderResource         EBufferUsageFlags::ShaderResource
+#define BUF_KeepCPUAccessible      EBufferUsageFlags::KeepCPUAccessible
+#define BUF_FastVRAM               EBufferUsageFlags::FastVRAM
+#define BUF_Transient              EBufferUsageFlags::Transient
+#define BUF_Shared                 EBufferUsageFlags::Shared
+#define BUF_AccelerationStructure  EBufferUsageFlags::AccelerationStructure
+#define BUF_RayTracingScratch	   EBufferUsageFlags::RayTracingScratch
+#define BUF_VertexBuffer           EBufferUsageFlags::VertexBuffer
+#define BUF_IndexBuffer            EBufferUsageFlags::IndexBuffer
+#define BUF_StructuredBuffer       EBufferUsageFlags::StructuredBuffer
+#define BUF_AnyDynamic             EBufferUsageFlags::AnyDynamic
+#define BUF_MultiGPUAllocate       EBufferUsageFlags::MultiGPUAllocate
+#define BUF_MultiGPUGraphIgnore    EBufferUsageFlags::MultiGPUGraphIgnore
+#define BUF_NullResource           EBufferUsageFlags::NullResource

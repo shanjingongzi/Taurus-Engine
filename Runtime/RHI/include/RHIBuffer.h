@@ -1,6 +1,6 @@
 #pragma once
 #include <Platform.h>
-#include "RHIDefinitins.h"
+#include "RHIDefinitions.h"
 struct RHIBufferDesc
 {
     uint32 size{};
@@ -13,7 +13,7 @@ struct RHIBufferDesc
     }
 
     bool IsNull(){
-        return size==0 &&stride= =0 &&usage==BUF_NullResource;
+        return size==0 &&stride==0 &&usage==BUF_NullResource;
     }
 };
 
