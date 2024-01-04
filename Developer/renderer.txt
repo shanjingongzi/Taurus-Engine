@@ -1,0 +1,3 @@
+渲染：渲染器编辑场景所有经过可见性测试的PrimitiveSceneProxy对象，利用其接口手机不同的FMeshBatch,然后在不同的
+渲染pass中遍历这些FMeshBatch，利用MeshDrawCommand和FMeshPassProcessor将其转成RHI的命令列表，最后才会生成对应的图形API命令
+，提交到GPU硬件中执行
