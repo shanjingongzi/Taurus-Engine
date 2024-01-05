@@ -3,7 +3,6 @@ project(Launch)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src src)
 file(GLOB HEADS  "*/*.h" "*/*.hpp")
 add_library(Launch STATIC ${src} ${HEADS})
-#set(CMAKE_CXX_FLAGS "-std=c++20")
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include

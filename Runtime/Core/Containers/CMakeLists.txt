@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.4.1)
 project(Containers)
 file(GLOB source "*/*.h" "*/*.hpp" "*/*.cpp" "*/*.c" "*/*.cc")
 add_library(Containers STATIC ${source})
-#set(CMAKE_CXX_FLAGS "-std=c++20")
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include 
     ${RUNTIME_CORE_DIR}/include 

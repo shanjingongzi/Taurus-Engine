@@ -4,7 +4,7 @@
 class RHIViewport
 {
 public:
-    FRHIViewport():RHIResource(RRI_Viewport){}
+    RHIViewport():RHIResource(RRI_Viewport){}
 
     virtual void *GetNativeSwapChain()const{return nullptr;}
 

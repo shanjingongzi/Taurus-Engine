@@ -25,7 +25,7 @@ public:
 
     void DisableLifeimeExtension();
 
-    RHIResourceType GetType()const;
+    ERHIResourceType GetType()const;
 
     Name GetOwnerName()const;
 
