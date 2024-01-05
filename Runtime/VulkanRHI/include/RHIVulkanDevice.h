@@ -1,4 +1,5 @@
 #pragma once
+#include <Array.hpp>
 namespace
 {
     class RHIVulkanDevice
@@ -22,5 +23,24 @@ namespace
         inline VulkanPhysicalDevice GetPhysicalHandle()const;
         inline const VkPhysicalDeviceProperties&GetDeviceProperties()const;
         inline VkExtent2D GetBastMatchedFragmentSize();
-    }
-}
+    private:
+        VkDevice device;
+        VulkanRHI::DeviceMemoryManager deviceMemoryManager;
+        VulkanRHI::Memorymanager memroyManager;
+        VulkanRHI::DeferredDeletionQueue2 deferredDeletionQueue;
+        VulkanRHI::StagingManager stagingManager;
+        VulkanRHI::FenceManager fenceManager;
+        VulkanRenderPassmanager renderPassManager;
+        VulkanTransientHeapCache *transientheapCache;
+        VulkanDescriptorSetCache*descriptorSetCache;
+        VulkanDescriptorPoolsManager *descriptorPoolsManager;
+        VulkanBindlessDescriptorManager *bindlessDescriptorManager;
+        VulkanShaderFactory shaderFactory;
+        VulkanSmplerState*defaultSampler;
+        VulkanTexture*defaultTexture;
+        VkPhysicalDevice gpu;
+        VkPhysicalDeviceProperties gpuProps;
+        VulkanPhysicalDeviceFeatures physicalFeatures;
+        Array<VkPhysicalDeviceFragmentShadingRateKHR>framentShaderingRates;
+    };
+};

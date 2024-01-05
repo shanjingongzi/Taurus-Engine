@@ -1,6 +1,35 @@
 #pragma once
 #include <Platform.h>
 
+enum class ERHIAccess :uint32
+{
+	Unknown=0,
+	CPURead=1<<0,
+	Present=1<<1,
+	IndirectArgs=1<<2,
+	VertexOrIndexBuffer=1<<3,
+	SRVCompute=1<<4,
+	SRVGraphics=1<<5,
+	CopySrc=1<<6,
+	ResolveSrc=1<<7,
+	DSVRead=1<<8,
+
+	UAVCompute=1<<9,
+	UAVGraphics=1<<10,
+	RTV=1<<11,
+	CopyDest=1<<12,
+	ResolveDest=1<<13,
+	DSVWrite=1<<14,
+	BVHRead=1<<15,
+	BVHWrite=1<<16,
+	Discard=1<<17,
+	ShadingRateSource=1<<18,
+	Last=ShadingRateSource,
+	None=Unknown,
+	Mask=(Last<<1)-1,
+	SRVMask=SRVCompute | SRVGraphics,
+};
+
 enum class ERHIInterfaceType
 {
 	Hidden,

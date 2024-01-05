@@ -1,10 +1,10 @@
 #pragma once
 #include "RHIResource.h"
 
-class RHIViewport
+class RHIViewport:public RHIResource
 {
 public:
-    RHIViewport():RHIResource(RRI_Viewport){}
+    RHIViewport():RHIResource(ERHIResourceType::RRT_Viewport){}
 
     virtual void *GetNativeSwapChain()const{return nullptr;}
 
@@ -16,12 +16,11 @@ public:
 
     virtual class RHICustomPresent* GetCustomPresent()const{return nullptr;}
 
-    virtual Tick(float deltaTime){}
+    virtual void Tick(float deltaTime){}
 
-    virtual WaitForFrameEventCompletion(){}
+    virtual void WaitForFrameEventCompletion(){}
 
     virtual void IssueFrameEvent(){}
-    
 private:
 
 };

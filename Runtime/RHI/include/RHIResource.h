@@ -1,6 +1,8 @@
 #pragma once
+#include <Type.hpp>
+#include "RHI.h"
 #include "RHIDefinitions.h"
-
+#include "RHICommandListImmediate.h"
 class RHIResource
 {
 public:  
@@ -31,10 +33,10 @@ public:
 
     void SetOwnerName(const Name &OwnerName);
 
-    virtual bool GetResourceInfo(RHIResourceInfo &outResourceInfo)const;
+    virtual bool GetResourceInfo(RHIResourceInfo&outResourceInfo)const;
 
     static void  BeginTrackingResource(RHIResource *resource);
-    static void EndTrackingResource(RHIRource *resource);
+    static void EndTrackingResource(RHIResource *resource);
 
     static void StartTrackingAllResource();
     static void StopTrackingAllResource();
@@ -43,9 +45,9 @@ private:
     const ERHIResourceType resourceType;
     uint8 committed:1;
     uint8 allowExtentLifeTime:1;
-    uint8 beingTracked:1
+    uint8 beingTracked:1;
     Name ownerName;
-    static RHIReousce*currentlyDeleting;
+    static RHIResource*currentlyDeleting;
     friend class RHICommandListImmediate;
 };
 
@@ -71,4 +73,28 @@ public:
     virtual void OnAquireThreadOwnership(){}
 
     virtual void OnReleaseThreadOwnership(){}
+};
+
+class RHIViewableResource:public RHIResource
+{
+public:
+    void SetTrackedAccess_Unsage(ERHIAccess access);
+    Name GetName()const{
+        return name;
+    }
+
+protected:
+    RHIViewableResource(ERHIResourceType resourceType,ERHIAccess access):RHIResource(resourceType),trackedAccess(access){}
+    void TakeOwnership(RHIViewableResource &other){
+        trackedAccess=other.trackedAccess;
+    }
+    void ReleaseOwnership(){
+        trackedAccess=ERHIAccess::Unknown;
+    }
+
+    Name name;
+private:
+    ERHIAccess trackedAccess;
+    friend class RHIComputeCommandList;
+    friend class RHIComputeContext;
 };

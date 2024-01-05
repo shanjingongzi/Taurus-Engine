@@ -1,5 +1,5 @@
 #pragma once
-#include <Platform.h>
+#include "Platform.h"
 #include "ThreadSafeCounter.h"
 
 class IRefCountedObject
@@ -237,5 +237,4 @@ private:
 	ReferenceType reference;
 	template<typename OtherType>
 	friend class TRefCountPtr;
-
 };

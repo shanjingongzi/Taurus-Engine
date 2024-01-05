@@ -7,5 +7,6 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${RUNTIME_THIRD_PART_DIR}
     ${RUNTIME_CORE_DIR}/include
+    ${RUNTIME_CONTAINERS}/include
     ${RUNTIME_RHI_DIR}/include
 )

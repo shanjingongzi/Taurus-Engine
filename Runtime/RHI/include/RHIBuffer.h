@@ -1,6 +1,8 @@
 #pragma once
 #include <Platform.h>
+#include <Type.hpp>
 #include "RHIDefinitions.h"
+#include "RHIResource.h"
 struct RHIBufferDesc
 {
     uint32 size{};
@@ -17,8 +19,15 @@ struct RHIBufferDesc
     }
 };
 
-class RHIBuffer{
+class RHIBuffer:public RHIViewableResource{
 public:
+    RHIBuffer(RHIBufferDesc const &desc);
+    RHIBufferDesc const &GetDesc()const {return desc;}
+    uint32 GetSize()const {return desc.size;}
+    uint32 GetStride()const{return desc.stride;}
+    EBufferUsageFlags GetUsage()const{return desc.usage;}
+    void SetName(const Name &val){name=val;}
+    virtual uint32 GetParentGPUIndex()const {return 0;}
 private:
     RHIBufferDesc desc;
 };

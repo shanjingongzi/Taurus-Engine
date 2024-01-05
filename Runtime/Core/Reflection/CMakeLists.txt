@@ -5,6 +5,7 @@ file(GLOB HEADS  "*/*.h" "*/*.hpp")
 add_library(Reflection ${src} ${HEADS})
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${RUNTIME_CORE_DIR}/include
 )
 
 set_target_properties(Reflection PROPERTIES FOLDER "Runtime/Core") 
