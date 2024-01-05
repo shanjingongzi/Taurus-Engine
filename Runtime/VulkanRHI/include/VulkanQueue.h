@@ -4,7 +4,7 @@
 class VulkanQueue
 {
 public:
-    VulkanQueue(VulkanDevice *device,uint32 familyIndex);
+    VulkanQueue(class VulkanDevice *device,uint32 familyIndex);
     ~VulkanQueue();
     inline uint32 GetFamilyIndex()const{
         return familyIndex;
@@ -44,9 +44,9 @@ private:
     uint32 queueIndex;
     class VulkanDevice *device;
     mutable CriticalSection cs;
-    VulkanCmdBuffer* lastSubmittedcmdBuffer;
+    class VulkanCmdBuffer* lastSubmittedcmdBuffer;
     uint64 lastSubmittedCmdBufferFenceCounter;
     uint64 SubmitCounter;
     VkPipelineStageFlags supportedStages;
-    VulkanLayoutManager layoutManager;
+    class VulkanLayoutManager layoutManager;
 };
