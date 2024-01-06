@@ -1,6 +1,8 @@
 #pragma once
 #include <Platform.h>
 #include <Vulkan/vulkan.h>
+#include "VulkanCommandBuffer.h"
+
 class VulkanQueue
 {
 public:
@@ -10,9 +12,9 @@ public:
         return familyIndex;
     }
 
-    void Submit(VulkanCmdBuffer *cmdBuffer,uint32 mumsignalSemaphores=0,VkSemaphore*signalSemaphore=nullptr);
-    inline void Submit(VulkanCmdBuffer *cmdBuffer,VkSemaphore sinalSemaphore){
-        Sumit(cmdBuffer,1,&signalSemaphore);
+    void Submit(class VulkanCmdBuffer *cmdBuffer,uint32 mumsignalSemaphores=0,VkSemaphore*signalSemaphore=nullptr);
+    inline void Submit(VulkanCmdBuffer *cmdBuffer,VkSemaphore signalSemaphore){
+        Submit(cmdBuffer,1,&signalSemaphore);
     }
     inline VkQueue GetHandle()const{
         return queue;
@@ -20,7 +22,7 @@ public:
     inline void GetLastSumittedInfo(VulkanCmdBuffer*&outCmdBuffer,uint64 &outFenceCounter)const{
         ScopeLock scopeLock(&cs);
         outCmdBuffer=lastSubmittedCmdBuffer;
-        outFenceCounter=lastSubmittedCmdBufferfenceCounter; 
+        outFenceCounter=lastSubmittedCmdBufferFenceCounter; 
     }
 
     inline uint64 GetSubmitCount()const{
@@ -34,7 +36,7 @@ public:
         return layoutManager;
     }
 
-    void NotifyDeletedImage(vkImage image);
+    void NotifyDeletedImage(VkImage image);
 private:
     void UpdateLastSubmittedCommandBuffer(VulkanCmdBuffer *buffer);
     void FillSupportedStageBits();
@@ -44,9 +46,9 @@ private:
     uint32 queueIndex;
     class VulkanDevice *device;
     mutable CriticalSection cs;
-    class VulkanCmdBuffer* lastSubmittedcmdBuffer;
+    class VulkanCmdBuffer* lastSubmittedCmdBuffer;
     uint64 lastSubmittedCmdBufferFenceCounter;
-    uint64 SubmitCounter;
+    uint64 submitCounter;
     VkPipelineStageFlags supportedStages;
     class VulkanLayoutManager layoutManager;
 };
