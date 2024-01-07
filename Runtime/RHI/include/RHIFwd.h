@@ -1,5 +1,5 @@
 #pragma once
-
+#include <RefCounting.h>
 namespace ERHIFeatureLevel
 {
     enum Type:int;
@@ -68,6 +68,7 @@ class RHIViewport;
 
 struct FHIUnoformBufferLayout;
 
+using BlendStateRHIRef=TRefCountPtr<BlendStateRHIRef>;
 
 
 
