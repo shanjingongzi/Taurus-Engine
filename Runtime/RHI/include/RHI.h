@@ -1,6 +1,5 @@
 #pragma once
 #include <Type.hpp>
-#include <Platform.h>
 #include "RHIDefinitions.h"
 
 struct ViewportBounds

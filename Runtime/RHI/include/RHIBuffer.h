@@ -1,5 +1,4 @@
 #pragma once
-#include <Platform.h>
 #include <Type.hpp>
 #include "RHIDefinitions.h"
 #include "RHIResource.h"

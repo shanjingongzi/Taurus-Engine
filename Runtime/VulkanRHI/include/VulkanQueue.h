@@ -1,5 +1,4 @@
 #pragma once
-#include <Platform.h>
 #include <Vulkan/vulkan.h>
 #include "VulkanCommandBuffer.h"
 

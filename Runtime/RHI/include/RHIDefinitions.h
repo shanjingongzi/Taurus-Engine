@@ -1,5 +1,4 @@
 #pragma once
-#include <Platform.h>
 
 enum class ERHIAccess :uint32
 {
