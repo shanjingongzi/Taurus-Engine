@@ -45,4 +45,4 @@ namespace
         VulkanPhysicalDeviceFeatures physicalFeatures;
         Array<VkPhysicalDeviceFragmentShadingRateKHR>framentShaderingRates;
     };
-};
+}
