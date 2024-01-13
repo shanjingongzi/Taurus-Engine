@@ -2,6 +2,26 @@
 #include <RHIViewport.h>
 #include "VulkanMemory.h"
 #include <Vector2.hpp>
+
+namespace VulkanRHI
+{
+    class Semaphore;
+};
+class VulkanBackBuffer:public VulkanTextrue
+{
+public:
+    VulkanBackBuffer(VulkanDevice  &device,VulkanViewport *viewport,EPixelFormat format,uint32 sizeX,uint32 sizeY,ETextureCreateFlags flags);
+    virtual ~VulkanBackBuffer();
+    
+    void OnLayoutTransition(VulkanCommandListContext &context,VkImageLayout newLayout)override final;
+    void OnGetBackBufferImage(RHICommandListImmediate&rhicmdList);
+    void OnAdvanceBackBufferFrame(RHICommandListImmediate &rhiCmdList);
+private:
+    void AcquirebackBufferImage(VulkanCommandListContext &context);
+private:
+    VulkanViewport *viewport;
+};
+
 class VulkanViewport:public RHIViewport,public VulkanRHI::DeviceChild
 {
 public:
@@ -51,7 +71,38 @@ protected:
     Array<VulkanRHI::Semaphore>RenderingBoneSemaphores;
     Array<VulkanView>textureViews;
     RefCountPtr<VulkanBackBuffer>rhiBackBuffer;
-    
-private:
-    uint32 index;
+    RefCountPtr<VulkanTexture>renderingBackBuffer;
+    CriticalSection recreatingSwapchain;
+
+    uint32 sizeX;
+    uint32 sizeY;
+    bool isFullScreen;
+    EPixelFormat pixelFormat;
+    int32 acquiredSemaphore;
+    CustomPresentRHIRef customPresent;
+    VulkanCmdBuffer *lastFrameCommandBuffer=nullptr;
+    uint64 lastFrameFenceCounter;
+    void CreateSwapchain(struct VulkanSwapChainRecreateInfo *recreateInfo);
+    void DestroySwapChain(struct VulkanSwapChainRecreateInfo *recreateInfo);
+    bool TruAcquireImageIndex();
+
+    void RecreateSwapchain(void *newNativeWindow);
+    void RecreateSwapchainFromRT(struct EPixelFormat preferredPixelFormat);
+    void Resize(uint32 sizeX,sizeY,bool isFullScreen,EPixelFormat preferredPixelFormat);
+
+    bool DoCheckedSwapChainJob(std::function<int32(VulkanViewport*)>swapChainJob);
+    bool SupportsStandardSwapchain();
+    bool RequiesRenderingbackBuffer();
+    EPixelFormat GetPixelFormatForNonDefaultSwapchain();
+
+    friend class VulkanDynamicRHI;
+    friend class VulkanCommandListContext;
+    friend class RHICommandAcquireBackBuffer;
+    friend class VulkanBackBuffer;
+};
+
+template<>
+struct VulkanResourceTraits<RHIViewport>
+{
+
 };
