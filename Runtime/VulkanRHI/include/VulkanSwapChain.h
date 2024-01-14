@@ -1,7 +1,17 @@
 #pragma once
 #include <Vulkan/vulkan.h>
 
-namespace VulkanSwapChain
+namespace VulkanRHI
+{
+    class Fence;
+}
+class VulkanSwapChainRecreateInfo
+{
+    VkSwapchainKHR swapChain;
+    VkSurfaceKHR surface;
+};
+
+class VulkanSwapChain
 {
 public:
     VulkanSwapChain(VkInstance instance,VulkanDevice &device,void windowHandle,EPixelFormat format,uint32 width,uint32 height,

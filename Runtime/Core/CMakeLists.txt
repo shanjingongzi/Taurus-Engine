@@ -6,6 +6,7 @@ add_subdirectory(Math)
 add_subdirectory(Containers)
 add_subdirectory(Async)
 add_subdirectory(Reflection)
+add_subdirectory(Module)
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include 
     ${RUNTIME_THIRD_PART_DIR}

@@ -5,12 +5,10 @@ file(GLOB HEADS "*/*.h" "*/*.cpp")
 add_library(Engine STATIC ${SRCS} ${HEADS})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include 
 	${RUNTIME_CORE_DIR}/include
-	${RUNTIME_MATH}/include
-	${RUNTIME_CONTAINERS}/include
+	${RUNTIME_MATH_DIR}/include
+	${RUNTIME_CONTAINERS_DIR}/include
+	${RUNTIME_MODULE_DIR}/include
 	${RUNTIME_THIRD_PARTY}
-	${CMAKE_CURRENT_SOURCE_DIR}/../Core/TRefl/include
-	${CMAKE_CURRENT_SOURCE_DIR}/../Renderer/OpenGLRender/include
-	${CMAKE_CURRENT_SOURCE_DIR}/../RenderCore/include
 )
 
 set_target_properties(Engine PROPERTIES FOLDER "Runtime") 
