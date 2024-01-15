@@ -20,4 +20,6 @@ public:
     static void WriteCrashMarker(const OptionalVulkanDeviceExtensions &optionalExtension,VkCommandBuffer cmdBuffer,VkBuffer destBuffer,cosnt Array<uint32>&entries,bool adding);
     
     static void WriteCrashMarker(const OptionalVulkanDeviceExtensions &optionalExtension,VkCommandBuffer cmdBuffer,VkBuffer destBuffer,cosnt Array<uint32>&)
-}
+};
+
+typedef VulkanWindowsPlatform VulkanPlatform;
